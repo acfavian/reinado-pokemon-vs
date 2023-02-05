@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+  @apply text-white; 
+  @apply bg-gradient-to-b from-[#002035] to-[#014672];
+  overscroll-behavior-y: none;
+}

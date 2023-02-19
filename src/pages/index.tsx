@@ -1,12 +1,8 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
-
-import { api } from "../utils/api";
 import { getOptionsForVote } from "../utils/getRandomPokemon";
 
 const Home: NextPage = () => {
-  const hello = api.example.hello.useQuery({ text: "" })
 
   const [first, second] = getOptionsForVote()
   return (
@@ -25,7 +21,6 @@ const Home: NextPage = () => {
             <div className="p-8">VS</div>
             <div className="w-16 h-16 bg-red-200">{second}</div>
           </div>
-          <h2>{hello.data?.greeting}</h2>
         </main>
     </>
   );

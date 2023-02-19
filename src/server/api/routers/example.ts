@@ -15,14 +15,4 @@ export const exampleRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
   }),
-  // input: z
-  //   .object({
-  //     text:_ z.string().nullish(),
-  //   })
-  //   .nullish(),
-  //   resolve({ input }) {
-  //     return {
-  //       greeting: `hello ${input?.text ?? "world"}`
-  //     }
-  //   }
 });

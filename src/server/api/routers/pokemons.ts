@@ -3,7 +3,7 @@ import { createTRPCRouter, publicProcedure } from "../trpc";
 
 import { PokemonClient } from "pokenode-ts";
 
-export const exampleRouter = createTRPCRouter({
+export const pokemonRouter = createTRPCRouter({
   getPokemonById: publicProcedure
     .input(z.object({
       id: z.number(),

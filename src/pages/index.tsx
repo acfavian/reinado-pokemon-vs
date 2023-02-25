@@ -15,8 +15,8 @@ const Home: NextPage = () => {
   const [ids, setIds] = useState(() => getOptionsForVote()) 
   const [first, second] = ids
 
-  const firtsPokemon = api.example.getPokemonById.useQuery( {id: first} )
-  const secondPokemon = api.example.getPokemonById.useQuery( {id: second} )
+  const firtsPokemon = api.pokemons.getPokemonById.useQuery( {id: first} )
+  const secondPokemon = api.pokemons.getPokemonById.useQuery( {id: second} )
   if(firtsPokemon.isLoading || secondPokemon.isLoading) return null
 
   const voteForBeauty = (selected: number) => {
@@ -63,7 +63,7 @@ export default Home;
 
 
 type RouterOutput = inferRouterOutputs<AppRouter>
-type PokemonFromServer = RouterOutput["example"]["getPokemonById"]
+type PokemonFromServer = RouterOutput["pokemons"]["getPokemonById"]
 
 
 const PokemonListing: React.FC<{pokemon: PokemonFromServer, vote: () => void}> = (props) =>  {

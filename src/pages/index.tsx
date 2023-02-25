@@ -4,7 +4,7 @@ import Head from "next/head";
 import { useState } from "react";
 import type React from "react";
 import { AppRouter } from "../server/api/root";
-import { api, RouterOutputs } from "../utils/api";
+import { api } from "../utils/api";
 import { getOptionsForVote } from "../utils/getRandomPokemon";
 
 const btn1 = "text-white bg-gradient-to-br from-teal-600 to-indigo-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -17,10 +17,17 @@ const Home: NextPage = () => {
 
   const firtsPokemon = api.pokemons.getPokemonById.useQuery( {id: first} )
   const secondPokemon = api.pokemons.getPokemonById.useQuery( {id: second} )
-  if(firtsPokemon.isLoading || secondPokemon.isLoading) return null
+  const voteMutation = api.pokemons.castVote.useMutation() 
+  // next line side get error if the useMutation() hook is below it
+  // if(firtsPokemon.isLoading || secondPokemon.isLoading) return null
 
   const voteForBeauty = (selected: number) => {
     // todo: fire mutation to persist changes
+    if(selected === first) {
+      voteMutation.mutate({votedFor: first, votedAgainst: second})
+    } else {
+      voteMutation.mutate({votedFor: second, votedAgainst: first})
+    }
     setIds(getOptionsForVote())
   }
 

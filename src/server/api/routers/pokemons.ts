@@ -13,7 +13,20 @@ export const pokemonRouter = createTRPCRouter({
       const pokemon = await api.getPokemonById(input.id)
       return { name: pokemon.name, sprites: pokemon.sprites }
     }),
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.example.findMany();
-  }),
+  castVote: publicProcedure
+    .input(z.object({
+      votedFor: z.number(),
+      votedAgainst: z.number()
+    }))
+    .mutation(async ({ ctx, input }) => {
+      const voteInDb = await ctx.prisma.vote.create({
+        data: {
+          ...input
+        }
+      })
+      return {success: true, vote: voteInDb}
+    }),
+  // getAll: publicProcedure.query(({ ctx }) => {
+  //   return ctx.prisma.example.findMany();
+  // }),
 });

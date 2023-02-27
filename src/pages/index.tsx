@@ -6,6 +6,8 @@ import type React from "react";
 import { AppRouter } from "../server/api/root";
 import { api } from "../utils/api";
 import { getOptionsForVote } from "../utils/getRandomPokemon";
+import Image from "next/image";
+import { GithubIcon } from "../icons";
 
 const btn1 = "text-white bg-gradient-to-br from-teal-600 to-indigo-600 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-green-200 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
 
@@ -61,6 +63,13 @@ const Home: NextPage = () => {
               </>
             )}
           </div>
+          <a  href="https://github.com/acfavian/reinado-pokemon-vs" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="absolute bottom-0 py-5"
+            >
+            <GithubIcon size={40} />
+          </a>
         </main>
     </>
   );
@@ -76,8 +85,12 @@ type PokemonFromServer = RouterOutput["pokemons"]["getPokemonById"]
 const PokemonListing: React.FC<{pokemon: PokemonFromServer, vote: () => void}> = (props) =>  {
   return (
     <div className="w-200 h-200 flex flex-col gap-5 items-center">
-      <img className="w-[120px]" 
-        src={String(props.pokemon.sprites.front_default)} />
+      <Image className="w-[120px]" 
+        src={String(props.pokemon.sprites.front_default)} 
+        alt={props.pokemon.name}
+        width={256}
+        height={256}
+        />
       <h2 className="text-xl capitalize">{props.pokemon.name}</h2>
       <button onClick={() => props.vote()} className={btn1}>es más bello</button>
     </div>

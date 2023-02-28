@@ -86,7 +86,7 @@ const PokemonListing: React.FC<{pokemon: PokemonFromServer, vote: () => void}> =
   return (
     <div className="w-200 h-200 flex flex-col gap-5 items-center">
       <Image className="w-[120px]" 
-        src={String(props.pokemon.sprites.front_default)} 
+        src={props.pokemon.spriteUrl} 
         alt={props.pokemon.name}
         width={256}
         height={256}
